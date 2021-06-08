@@ -19,25 +19,27 @@ namespace Tetris
             //}
             #endregion
 
-            Square s = new Square(2, 5, '*'); //квадрат з точок '*'
+            Figure s = new Stick(20, 5, '*'); //квадрат з точок '*'
             s.Draw();
+            Thread.Sleep(1000);
+            s.Hide();
+            s.Rotate();
+            s.Draw();           
 
             Thread.Sleep(1000);
             s.Hide();
-            s.Move(Direction.RIGHT);
-            s.Draw();
-
-            Thread.Sleep(1000);
-            s.Hide();
+            
             s.Move(Direction.DOWN);
             s.Draw();
             Thread.Sleep(1000);
             s.Hide();
+            s.Rotate();
             s.Move(Direction.DOWN);
             s.Draw();
 
             Thread.Sleep(1000);
             s.Hide();
+            s.Rotate();
             s.Move(Direction.LEFT);
             s.Draw();
 
