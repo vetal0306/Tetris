@@ -19,7 +19,8 @@ namespace Tetris
             //}
             #endregion
 
-            Figure s = new Stick(20, 5, '*'); //квадрат з точок '*'
+            FigureGenerator generator = new FigureGenerator(20, 0, '*');
+            Figure s = generator.GetNewFigure(); //квадрат з точок '*'
             s.Draw();
             Thread.Sleep(1000);
             s.Hide();
