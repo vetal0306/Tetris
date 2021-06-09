@@ -7,38 +7,43 @@ namespace Tetris
     abstract class Figure
     {
         const int LENGHT = 4;
-        protected Point[] points = new Point[LENGHT];
+        public Point[] Points = new Point[LENGHT];
 
 
 
         public void Draw()
         {
-            foreach (Point p in points)
+            foreach (Point p in Points)
             {
                 p.Draw();
             }
         }
 
-        internal void TryMove(Direction dir)
+        internal Result TryMove(Direction dir)
         {
             Hide();
             var clone = Clone();
             Move(clone, dir);
-            if (VerifyPosition(clone))
-                points = clone;
+            var result = VerityPosition(clone);
+            if (result == Result.Success)
+                Points = clone;
 
             Draw();
+            return result;
         }
 
-        private bool VerifyPosition(Point[] plist)
+        private Result VerityPosition(Point[] newPoints)
         {
-            foreach (var p in plist)
+            foreach (var p in newPoints)
             {
-                if (p.X < 0 || p.Y < 0 || p.X >= Field.Widht || p.Y >= Field.HEIGHT)
-                    return false;
+                if (p.Y >= Field.Height)
+                    return Result.Down_Border_Strike;
+                if (p.X >= Field.Widht || p.X <= 0 || p.Y <= 0)
+                    return Result.Border_Strike;
+                if (CheckStrike(p))
+                    return Result.Heap_Strike;
             }
-
-            return true;
+            return Result.Success;           
         }
 
         private Point[] Clone()
@@ -46,7 +51,7 @@ namespace Tetris
             var newPoint = new Point[LENGHT];
             for (int i = 0; i < LENGHT; i++) 
             {
-                newPoint[i] = new Point(points[i]);
+                newPoint[i] = new Point(Points[i]);
             }
             return newPoint;
 
@@ -72,21 +77,24 @@ namespace Tetris
 
         public void Hide()
         {
-            foreach (Point p in points)
+            foreach (Point p in Points)
             {
                 p.Hide();
             }
         }
 
-        internal void TryRotate()
+        internal Result TryRotate()
         {
             Hide();
             var clone = Clone();
             Rotate(clone);
-            if (VerifyPosition(clone))
-                points = clone;
+
+            var result = VerityPosition(clone);
+            if (result == Result.Success)
+                Points = clone;
 
             Draw();
+            return result;
         }
 
         public abstract void Rotate(Point[] plist);
