@@ -14,14 +14,14 @@ namespace Tetris
             Points[3] = new Point(x, y + 3, sym);
             Draw();
         }
-        public override void Rotate(Point[] plist)
+        public override void Rotate()
         {
-            if (plist[0].X == plist[1].X)
+            if (Points[0].X == Points[1].X)
             {
-                RotateHorizontal(plist);
+                RotateHorizontal(Points);
             }
             else
-                RotateVertical(plist);
+                RotateVertical(Points);
         }
 
         private void RotateVertical(Point[] plist)
