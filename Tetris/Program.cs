@@ -22,12 +22,12 @@ namespace Tetris
             FigureGenerator generator = new FigureGenerator(20, 0, '*');
             Figure s = null;
             while (true)
-            {
-                FigureFall(s, generator);
+            {                
+                FigureFall(out s, generator);
             }          
             
         }
-        static void FigureFall(Figure fig, FigureGenerator generator)
+        static void FigureFall(out Figure fig, FigureGenerator generator)
         {
             fig = generator.GetNewFigure();
             fig.Draw();
