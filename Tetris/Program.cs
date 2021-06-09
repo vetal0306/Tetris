@@ -7,17 +7,12 @@ namespace Tetris
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(Field.WIDHT, Field.HEIGHT);
-            Console.SetBufferSize(Field.WIDHT, Field.HEIGHT);
-            #region
-            //Figure[] f = new Figure[2]; // отримуємо фігури за допомогою класу Figure який наслідують Square, Stick
-            //f[0] = new Square(2, 5, '*');
-            //f[1] = new Stick(4, 7, '|');
-            //foreach (Figure fig in f)
-            //{
-            //    fig.Draw();
-            //}
-            #endregion
+            Console.SetWindowSize(Field.Widht, Field.HEIGHT);
+            Console.SetBufferSize(Field.Widht, Field.HEIGHT);
+            
+
+            Field.Widht = 20;
+            
 
             FigureGenerator generator = new FigureGenerator(20, 0, '*');
             Figure currentFigure = generator.GetNewFigure();
