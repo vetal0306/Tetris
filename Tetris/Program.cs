@@ -20,25 +20,34 @@ namespace Tetris
             #endregion
 
             FigureGenerator generator = new FigureGenerator(20, 0, '*');
-            Figure s = null;
-            while (true)
-            {                
-                FigureFall(out s, generator);
-            }          
+            Figure currentFigure = generator.GetNewFigure();
+
+            while (true) 
+            {
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey();
+                    HandleKey(currentFigure, key);
+                }
+            }
             
         }
-        static void FigureFall(out Figure fig, FigureGenerator generator)
-        {
-            fig = generator.GetNewFigure();
-            fig.Draw();
 
-            for (int i = 0; i < 15; i++)
+        private static void HandleKey(Figure currentFigure, ConsoleKeyInfo key)
+        {
+            switch (key.Key)
             {
-                fig.Hide();
-                fig.Move(Direction.DOWN);
-                fig.Draw();
-                Thread.Sleep(1000);
+                case ConsoleKey.LeftArrow:
+                    currentFigure.Move(Direction.LEFT);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentFigure.Move(Direction.RIGHT);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentFigure.Move(Direction.DOWN);
+                    break;
             }
+
         }
     }
 }
