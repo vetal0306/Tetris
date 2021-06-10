@@ -41,16 +41,15 @@ namespace Tetris
                     return Result.Down_Border_Strike;
                 if (p.X >= Field.Widht || p.X <= 0 || p.Y <= 0)
                     return Result.Border_Strike;
-                if (CheckStrike(p))
+                if (Field.CheckStrike(p))
+                {
                     return Result.Heap_Strike;
+                }
             }
             return Result.Success;           
         }
 
-        private bool CheckStrike(Point p)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Move(Direction dir)
         {
